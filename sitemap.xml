@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
+  
   <!-- Main Homepage -->
   <url>
     <loc>https://helixoriginator.github.io/dharmic-innovation-velocity-index/</loc>
@@ -8,21 +8,45 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-
-  <!-- Optional About / Info Page -->
+  
+  <!-- Dashboard Section -->
   <url>
-    <loc>https://helixoriginator.github.io/dharmic-innovation-velocity-index/about.html</loc>
+    <loc>https://helixoriginator.github.io/dharmic-innovation-velocity-index/#dashboard</loc>
     <lastmod>2025-11-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Optional Projects / Dashboard Page -->
-  <url>
-    <loc>https://helixoriginator.github.io/dharmic-innovation-velocity-index/projects.html</loc>
-    <lastmod>2025-11-30</lastmod>
-    <changefreq>weekly</changefreq>
+    <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
-
+  
+  <!-- Create Project Section -->
+  <url>
+    <loc>https://helixoriginator.github.io/dharmic-innovation-velocity-index/#create</loc>
+    <lastmod>2025-11-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Projects Section -->
+  <url>
+    <loc>https://helixoriginator.github.io/dharmic-innovation-velocity-index/#projects</loc>
+    <lastmod>2025-11-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- About DIVI Section -->
+  <url>
+    <loc>https://helixoriginator.github.io/dharmic-innovation-velocity-index/#about</loc>
+    <lastmod>2025-11-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- GitHub Repository (external but relevant) -->
+  <url>
+    <loc>https://github.com/helixoriginator/dharmic-innovation-velocity-index</loc>
+    <lastmod>2025-11-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
 </urlset>
