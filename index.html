@@ -1,65 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DIVI — Dharmic Innovation Velocity Index</title>
-  <link rel="icon" href="favicon.png" type="image/png" />
   <style>
-    /* Global Dark Mode */
     :root { color-scheme: dark; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #0d0d0d;
-      color: #e0e0e0;
-      line-height: 1.6;
-    }
-    header {
-      background-color: #111;
-      padding: 2rem;
-      text-align: center;
-      border-bottom: 1px solid #222;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2rem;
-      color: #f0f0f0;
-    }
-    header p {
-      color: #aaa;
-      margin-top: 0.5rem;
-    }
-    main {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 1rem;
-    }
-    .card {
-      background-color: #1a1a1a;
-      border: 1px solid #333;
-      border-radius: 12px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-    input, button {
-      padding: 0.75rem 1rem;
-      border-radius: 8px;
-      border: 1px solid #555;
-      background-color: #222;
-      color: #e0e0e0;
-      font-size: 1rem;
-    }
-    input:focus { outline: 2px solid #555; }
-    button {
-      cursor: pointer;
-      margin-top: 0.5rem;
-      background-color: #4f46e5;
-      border-color: #4f46e5;
-      color: white;
-    }
-    button:hover { background-color: #6366f1; }
-    ul { padding-left: 1.2rem; }
+    body { margin:0; font-family: Arial,sans-serif; background:#0d0d0d; color:#e0e0e0; line-height:1.6; }
+    header { background:#111; padding:2rem; text-align:center; border-bottom:1px solid #222; }
+    header h1 { margin:0; font-size:2rem; }
+    header p { color:#aaa; margin-top:0.5rem; }
+    main { max-width:900px; margin:2rem auto; padding:1rem; }
+    .card { background:#1a1a1a; border:1px solid #333; border-radius:12px; padding:1.5rem; margin-bottom:1.5rem; }
+    input, button { padding:0.75rem 1rem; border-radius:8px; border:1px solid #555; background:#222; color:#e0e0e0; font-size:1rem; }
+    input:focus { outline:2px solid #555; }
+    button { cursor:pointer; margin-top:0.5rem; background:#4f46e5; border-color:#4f46e5; color:white; }
+    button:hover { background:#6366f1; }
+    ul { padding-left:1.2rem; }
+    .project-item { margin-bottom:0.75rem; padding:0.5rem; border:1px solid #333; border-radius:8px; background:#222; }
+    .bar { height:10px; border-radius:5px; background:#6366f1; margin-top:4px; }
+    .export-btn { background:#16a34a; margin-top:1rem; }
   </style>
 </head>
 <body>
@@ -80,45 +40,62 @@
   <div class="card">
     <h2>Projects</h2>
     <ul id="projectList"></ul>
+    <button class="export-btn" onclick="exportProjects()">Export Projects (JSON)</button>
   </div>
 </main>
 
 <script>
-  const projects = [];
+  const projects = JSON.parse(localStorage.getItem('diviProjects')||'[]');
+
+  function saveProjects() {
+    localStorage.setItem('diviProjects', JSON.stringify(projects));
+  }
 
   function createProject() {
     const input = document.getElementById('projectName');
     const name = input.value.trim();
     const message = document.getElementById('message');
+    if(!name){ message.textContent='Project name cannot be empty.'; return; }
 
-    if (!name) {
-      message.textContent = 'Project name cannot be empty.';
-      return;
-    }
+    const karmaIndex = (Math.random()*10).toFixed(1);
+    const phases = ['Observation','Reflection','Creation','Dissemination'];
+    const kallolPhase = phases[Math.floor(Math.random()*phases.length)];
+    const helixId = 'DIVI-' + Math.floor(Math.random()*100000);
 
-    const project = {
-      name: name,
-      karmaIndex: (Math.random() * 10).toFixed(1),
-      kallolPhase: ['Observation','Reflection','Creation','Dissemination'][Math.floor(Math.random()*4)],
-      helixId: 'DIVI-' + Math.floor(Math.random()*100000)
-    };
+    const project = { name, karmaIndex, kallolPhase, helixId, date: new Date().toISOString() };
     projects.push(project);
-
-    input.value = '';
-    message.textContent = `Project "${project.name}" created!`;
-
+    saveProjects();
+    input.value=''; message.textContent=`Project "${name}" created!`;
     renderProjects();
   }
 
   function renderProjects() {
     const list = document.getElementById('projectList');
-    list.innerHTML = '';
-    projects.forEach(p => {
+    list.innerHTML='';
+    projects.forEach(p=>{
       const li = document.createElement('li');
-      li.innerHTML = `<strong>${p.name}</strong> — Karma: ${p.karmaIndex}, Phase: ${p.kallolPhase}, ID: ${p.helixId}`;
+      li.className='project-item';
+      li.innerHTML=`
+        <strong>${p.name}</strong> — Helix ID: ${p.helixId}<br>
+        Karma Index: ${p.karmaIndex}
+        <div class="bar" style="width:${p.karmaIndex*10}%;"></div>
+        Phase: ${p.kallolPhase}
+      `;
       list.appendChild(li);
     });
   }
+
+  function exportProjects(){
+    const dataStr = "data:text/json;charset=utf-8,"+encodeURIComponent(JSON.stringify(projects,null,2));
+    const dlAnchor = document.createElement('a');
+    dlAnchor.setAttribute("href", dataStr);
+    dlAnchor.setAttribute("download","divi_projects.json");
+    document.body.appendChild(dlAnchor);
+    dlAnchor.click();
+    dlAnchor.remove();
+  }
+
+  renderProjects();
 </script>
 
 </body>
