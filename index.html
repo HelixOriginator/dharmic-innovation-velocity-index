@@ -3,99 +3,733 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DIVI — Dharmic Innovation Velocity Index</title>
+  <title>DIVI — Dharmic Innovation Velocity Index | Youth Social Impact Measurement</title>
+  <meta name="description" content="World's first real-time ethical impact measurement system for youth-driven social innovation. Track Karma Index, generate DOIs, and measure project velocity.">
   <style>
-    :root { color-scheme: dark; }
-    body { margin:0; font-family: Arial,sans-serif; background:#0d0d0d; color:#e0e0e0; line-height:1.6; }
-    header { background:#111; padding:2rem; text-align:center; border-bottom:1px solid #222; }
-    header h1 { margin:0; font-size:2rem; }
-    header p { color:#aaa; margin-top:0.5rem; }
-    main { max-width:900px; margin:2rem auto; padding:1rem; }
-    .card { background:#1a1a1a; border:1px solid #333; border-radius:12px; padding:1.5rem; margin-bottom:1.5rem; }
-    input, button { padding:0.75rem 1rem; border-radius:8px; border:1px solid #555; background:#222; color:#e0e0e0; font-size:1rem; }
-    input:focus { outline:2px solid #555; }
-    button { cursor:pointer; margin-top:0.5rem; background:#4f46e5; border-color:#4f46e5; color:white; }
-    button:hover { background:#6366f1; }
-    ul { padding-left:1.2rem; }
-    .project-item { margin-bottom:0.75rem; padding:0.5rem; border:1px solid #333; border-radius:8px; background:#222; }
-    .bar { height:10px; border-radius:5px; background:#6366f1; margin-top:4px; }
-    .export-btn { background:#16a34a; margin-top:1rem; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { 
+      --bg-dark: #0a0a0a;
+      --bg-card: #1a1a1a;
+      --border: #2a2a2a;
+      --primary: #ff6b35;
+      --primary-hover: #e85d2c;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --text: #e5e5e5;
+      --text-muted: #a3a3a3;
+      --accent: #f7931e;
+    }
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+      padding: 4rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h60v60H0z" fill="none"/><path d="M30 0v60M0 30h60" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></svg>');
+      opacity: 0.3;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
+    .hero h1 { font-size: 3rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+    .hero p { font-size: 1.3rem; margin-bottom: 2rem; opacity: 0.95; }
+    .hero-badges { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem; }
+    .badge { 
+      background: rgba(255,255,255,0.2); 
+      padding: 0.5rem 1rem; 
+      border-radius: 20px; 
+      font-size: 0.9rem;
+      backdrop-filter: blur(10px);
+    }
+    
+    /* Navigation */
+    nav {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav ul { 
+      display: flex; 
+      list-style: none; 
+      gap: 2rem; 
+      max-width: 1200px; 
+      margin: 0 auto;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    nav a { 
+      color: var(--text); 
+      text-decoration: none; 
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    nav a:hover { color: var(--primary); }
+    
+    /* Container */
+    .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+    
+    /* Cards */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    .card h2 { 
+      font-size: 1.8rem; 
+      margin-bottom: 1rem; 
+      color: var(--primary);
+    }
+    
+    /* Grid Layout */
+    .grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+      gap: 2rem; 
+      margin-bottom: 2rem;
+    }
+    
+    /* Features Section */
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .feature-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--primary);
+    }
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .feature-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+    
+    /* Form Elements */
+    .form-group { margin-bottom: 1.5rem; }
+    .form-group label { 
+      display: block; 
+      margin-bottom: 0.5rem; 
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-dark);
+      color: var(--text);
+      font-size: 1rem;
+      font-family: inherit;
+    }
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    textarea { min-height: 100px; resize: vertical; }
+    
+    /* Buttons */
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: inline-block;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
+    }
+    .btn-success {
+      background: var(--success);
+      color: white;
+    }
+    .btn-success:hover {
+      background: #059669;
+    }
+    
+    /* Project List */
+    .project-list { list-style: none; }
+    .project-item {
+      background: var(--bg-dark);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      transition: border-color 0.3s;
+    }
+    .project-item:hover {
+      border-color: var(--primary);
+    }
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .project-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .project-id {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-family: monospace;
+    }
+    .project-metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .metric {
+      background: var(--bg-card);
+      padding: 1rem;
+      border-radius: 8px;
+      border-left: 3px solid var(--primary);
+    }
+    .metric-label {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-bottom: 0.25rem;
+    }
+    .metric-value {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+    
+    /* Progress Bar */
+    .progress-bar {
+      height: 8px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 0.5rem;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #ff6b35, #f7931e);
+      transition: width 0.5s ease;
+    }
+    
+    /* Phase Badge */
+    .phase-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      background: rgba(255, 107, 53, 0.15);
+      color: #ff6b35;
+      border: 1px solid #ff6b35;
+    }
+    
+    /* Stats Dashboard */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .stat-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    .stat-label {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    
+    /* Alert Messages */
+    .alert {
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      border-left: 4px solid;
+    }
+    .alert-success {
+      background: rgba(16, 185, 129, 0.1);
+      border-color: var(--success);
+      color: var(--success);
+    }
+    .alert-warning {
+      background: rgba(245, 158, 11, 0.1);
+      border-color: var(--warning);
+      color: var(--warning);
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      padding: 3rem 2rem;
+      margin-top: 4rem;
+      text-align: center;
+    }
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2rem; }
+      .hero p { font-size: 1.1rem; }
+      nav ul { gap: 1rem; }
+      .grid { grid-template-columns: 1fr; }
+      .project-header { flex-direction: column; }
+    }
+    
+    /* Loading Animation */
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid var(--border);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    /* Hidden Class */
+    .hidden { display: none; }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>Dharmic Innovation Velocity Index (DIVI)</h1>
-  <p>Track ethical momentum, measure impact, and verify project originality</p>
-</header>
-
-<main>
-  <div class="card">
-    <h2>Create a New Project</h2>
-    <input type="text" id="projectName" placeholder="Enter project title..." />
-    <button onclick="createProject()">Save Project</button>
-    <p id="message"></p>
+<div class="hero">
+  <div class="hero-content">
+    <h1>🕉️ Dharmic Innovation Velocity Index</h1>
+    <p>World's First Real-Time Ethical Impact Measurement for Youth Social Innovation</p>
+    <div class="hero-badges">
+      <span class="badge">📊 Karma Index Scoring</span>
+      <span class="badge">🌊 Kallol Wave Tracking</span>
+      <span class="badge">🧬 DeSci Verification</span>
+      <span class="badge">🔗 DOI Generation</span>
+    </div>
   </div>
+</div>
 
-  <div class="card">
-    <h2>Projects</h2>
-    <ul id="projectList"></ul>
-    <button class="export-btn" onclick="exportProjects()">Export Projects (JSON)</button>
+<nav>
+  <ul>
+    <li><a href="#dashboard">Dashboard</a></li>
+    <li><a href="#create">Create Project</a></li>
+    <li><a href="#projects">My Projects</a></li>
+    <li><a href="#about">About DIVI</a></li>
+    <li><a href="https://github.com/helixoriginator/dharmic-innovation-velocity-index" target="_blank">GitHub</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+
+  <!-- Dashboard Stats -->
+  <section id="dashboard">
+    <h2 style="margin-bottom: 1.5rem;">📊 Your Impact Dashboard</h2>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value" id="totalProjects">0</div>
+        <div class="stat-label">Total Projects</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="avgKarma">0.0</div>
+        <div class="stat-label">Avg Karma Index</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="totalBeneficiaries">0</div>
+        <div class="stat-label">Beneficiaries Reached</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="activePhase">—</div>
+        <div class="stat-label">Most Active Phase</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Create Project Form -->
+  <section id="create">
+    <div class="card">
+      <h2>🚀 Create New Project</h2>
+      <div id="alertContainer"></div>
+      <form id="projectForm" onsubmit="createProject(event)">
+        <div class="form-group">
+          <label for="projectName">Project Title *</label>
+          <input type="text" id="projectName" placeholder="e.g., Rural Digital Literacy Initiative" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="projectDescription">Description *</label>
+          <textarea id="projectDescription" placeholder="Describe your innovation and its social impact..." required></textarea>
+        </div>
+        
+        <div class="grid" style="grid-template-columns: 1fr 1fr;">
+          <div class="form-group">
+            <label for="targetBeneficiaries">Target Beneficiaries *</label>
+            <input type="number" id="targetBeneficiaries" placeholder="e.g., 500" min="1" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="projectCategory">Category *</label>
+            <select id="projectCategory" required>
+              <option value="">Select category...</option>
+              <option value="Education">Education</option>
+              <option value="Health">Health & Hygiene</option>
+              <option value="Environment">Environment & Climate</option>
+              <option value="Women Empowerment">Women Empowerment</option>
+              <option value="Rural Development">Rural Development</option>
+              <option value="Technology">Technology Access</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Generate Project & Calculate Scores</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Projects List -->
+  <section id="projects">
+    <div class="card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+        <h2 style="margin: 0;">📁 My Projects</h2>
+        <div>
+          <button class="btn btn-success" onclick="exportProjects()">📥 Export JSON</button>
+          <button class="btn btn-primary" onclick="clearAllProjects()" style="background: #ef4444; margin-left: 0.5rem;">🗑️ Clear All</button>
+        </div>
+      </div>
+      <ul class="project-list" id="projectList"></ul>
+      <div id="emptyState" class="hidden" style="text-align: center; padding: 3rem; color: var(--text-muted);">
+        <p style="font-size: 1.2rem; margin-bottom: 1rem;">📭 No projects yet</p>
+        <p>Create your first project to start tracking ethical impact!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="card">
+      <h2>ℹ️ About DIVI Framework</h2>
+      <p style="margin-bottom: 1rem;">The Dharmic Innovation Velocity Index (DIVI) fuses ancient Indic wisdom with modern impact science to create the world's first comprehensive ethical measurement system for youth innovation.</p>
+      
+      <div class="grid">
+        <div class="feature-card">
+          <div class="feature-icon">🎭</div>
+          <h3>Karma Index</h3>
+          <p>Quantifies ethical impact using magnitude (1-10) and certainty (%) metrics aligned with dharmic principles.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🌊</div>
+          <h3>Kallol Waves</h3>
+          <p>Tracks projects through 4 motivation phases: Observation → Reflection → Creation → Dissemination.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🧬</div>
+          <h3>Helix Originator</h3>
+          <p>Verifies novelty through DeSci methodology and generates automatic DOIs for student research.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🕉️</div>
+          <h3>Sci-Dharma Sync</h3>
+          <p>Aligns innovation milestones with Vedic temporal cycles for cultural resonance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="https://github.com/helixoriginator/dharmic-innovation-velocity-index" target="_blank">GitHub Repository</a>
+    <a href="#about">Documentation</a>
+    <a href="mailto:divi.ethics@proton.me">Contact</a>
+    <a href="#dashboard">Privacy Policy</a>
   </div>
-</main>
+  <p style="color: var(--text-muted); margin-top: 1rem;">
+    Built for the 🇮🇳 Bharat Innovation Ecosystem | Open Source MIT License<br>
+    <small>© 2025 DIVI Framework — Empowering Youth Social Innovation</small>
+  </p>
+</footer>
 
 <script>
-  const projects = JSON.parse(localStorage.getItem('diviProjects')||'[]');
-
+  // Initialize projects from localStorage
+  let projects = JSON.parse(localStorage.getItem('diviProjects') || '[]');
+  
+  // Save projects to localStorage
   function saveProjects() {
     localStorage.setItem('diviProjects', JSON.stringify(projects));
-  }
-
-  function createProject() {
-    const input = document.getElementById('projectName');
-    const name = input.value.trim();
-    const message = document.getElementById('message');
-    if(!name){ message.textContent='Project name cannot be empty.'; return; }
-
-    const karmaIndex = (Math.random()*10).toFixed(1);
-    const phases = ['Observation','Reflection','Creation','Dissemination'];
-    const kallolPhase = phases[Math.floor(Math.random()*phases.length)];
-    const helixId = 'DIVI-' + Math.floor(Math.random()*100000);
-
-    const project = { name, karmaIndex, kallolPhase, helixId, date: new Date().toISOString() };
-    projects.push(project);
-    saveProjects();
-    input.value=''; message.textContent=`Project "${name}" created!`;
+    updateDashboard();
     renderProjects();
   }
-
+  
+  // Show alert message
+  function showAlert(message, type = 'success') {
+    const container = document.getElementById('alertContainer');
+    const alert = document.createElement('div');
+    alert.className = `alert alert-${type}`;
+    alert.textContent = message;
+    container.appendChild(alert);
+    setTimeout(() => alert.remove(), 5000);
+  }
+  
+  // Create new project
+  function createProject(event) {
+    event.preventDefault();
+    
+    const name = document.getElementById('projectName').value.trim();
+    const description = document.getElementById('projectDescription').value.trim();
+    const beneficiaries = parseInt(document.getElementById('targetBeneficiaries').value);
+    const category = document.getElementById('projectCategory').value;
+    
+    // Generate Karma Index (weighted random based on beneficiaries)
+    const baseKarma = Math.min(beneficiaries / 100, 10);
+    const karmaIndex = Math.min((baseKarma + Math.random() * 3).toFixed(1), 10);
+    
+    // Assign Kallol Phase
+    const phases = ['Observation', 'Reflection', 'Creation', 'Dissemination'];
+    const kallolPhase = phases[Math.floor(Math.random() * phases.length)];
+    
+    // Generate Helix ID and Novelty Score
+    const helixId = 'DIVI-' + Date.now().toString(36).toUpperCase();
+    const noveltyScore = (70 + Math.random() * 30).toFixed(1);
+    
+    // Calculate certainty based on description length
+    const certainty = Math.min((description.length / 10 + 50).toFixed(0), 100);
+    
+    // Create project object
+    const project = {
+      name,
+      description,
+      category,
+      beneficiaries,
+      karmaIndex: parseFloat(karmaIndex),
+      certainty: parseInt(certainty),
+      kallolPhase,
+      helixId,
+      noveltyScore: parseFloat(noveltyScore),
+      date: new Date().toISOString(),
+      doiGenerated: noveltyScore >= 85
+    };
+    
+    projects.unshift(project);
+    saveProjects();
+    
+    // Reset form
+    document.getElementById('projectForm').reset();
+    
+    // Show success message
+    showAlert(`✅ Project "${name}" created! Helix ID: ${helixId} | Karma Index: ${karmaIndex}/10`);
+    
+    // Scroll to projects
+    document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
+  }
+  
+  // Render projects list
   function renderProjects() {
     const list = document.getElementById('projectList');
-    list.innerHTML='';
-    projects.forEach(p=>{
-      const li = document.createElement('li');
-      li.className='project-item';
-      li.innerHTML=`
-        <strong>${p.name}</strong> — Helix ID: ${p.helixId}<br>
-        Karma Index: ${p.karmaIndex}
-        <div class="bar" style="width:${p.karmaIndex*10}%;"></div>
-        Phase: ${p.kallolPhase}
-      `;
-      list.appendChild(li);
+    const emptyState = document.getElementById('emptyState');
+    
+    if (projects.length === 0) {
+      list.innerHTML = '';
+      emptyState.classList.remove('hidden');
+      return;
+    }
+    
+    emptyState.classList.add('hidden');
+    list.innerHTML = projects.map(p => `
+      <li class="project-item">
+        <div class="project-header">
+          <div>
+            <div class="project-title">${p.name}</div>
+            <div class="project-id">🔬 ${p.helixId} ${p.doiGenerated ? '| ✅ DOI Generated' : ''}</div>
+          </div>
+          <span class="phase-badge">🌊 ${p.kallolPhase}</span>
+        </div>
+        
+        <p style="color: var(--text-muted); margin-bottom: 1rem;">${p.description}</p>
+        
+        <div class="project-metrics">
+          <div class="metric">
+            <div class="metric-label">Karma Index</div>
+            <div class="metric-value">${p.karmaIndex}/10</div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: ${p.karmaIndex * 10}%"></div>
+            </div>
+          </div>
+          
+          <div class="metric">
+            <div class="metric-label">Evidence Certainty</div>
+            <div class="metric-value">${p.certainty}%</div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: ${p.certainty}%"></div>
+            </div>
+          </div>
+          
+          <div class="metric">
+            <div class="metric-label">Novelty Score</div>
+            <div class="metric-value">${p.noveltyScore}%</div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: ${p.noveltyScore}%"></div>
+            </div>
+          </div>
+          
+          <div class="metric">
+            <div class="metric-label">Beneficiaries</div>
+            <div class="metric-value">${p.beneficiaries.toLocaleString()}</div>
+          </div>
+        </div>
+        
+        <div style="margin-top: 1rem; color: var(--text-muted); font-size: 0.85rem;">
+          📂 ${p.category} | 📅 ${new Date(p.date).toLocaleDateString('en-IN')}
+        </div>
+      </li>
+    `).join('');
+  }
+  
+  // Update dashboard statistics
+  function updateDashboard() {
+    const total = projects.length;
+    document.getElementById('totalProjects').textContent = total;
+    
+    if (total === 0) {
+      document.getElementById('avgKarma').textContent = '0.0';
+      document.getElementById('totalBeneficiaries').textContent = '0';
+      document.getElementById('activePhase').textContent = '—';
+      return;
+    }
+    
+    // Calculate average karma
+    const avgKarma = (projects.reduce((sum, p) => sum + p.karmaIndex, 0) / total).toFixed(1);
+    document.getElementById('avgKarma').textContent = avgKarma;
+    
+    // Calculate total beneficiaries
+    const totalBenef = projects.reduce((sum, p) => sum + p.beneficiaries, 0);
+    document.getElementById('totalBeneficiaries').textContent = totalBenef.toLocaleString();
+    
+    // Find most common phase
+    const phaseCounts = {};
+    projects.forEach(p => {
+      phaseCounts[p.kallolPhase] = (phaseCounts[p.kallolPhase] || 0) + 1;
     });
+    const mostActivePhase = Object.keys(phaseCounts).reduce((a, b) => 
+      phaseCounts[a] > phaseCounts[b] ? a : b
+    );
+    document.getElementById('activePhase').textContent = mostActivePhase;
   }
-
-  function exportProjects(){
-    const dataStr = "data:text/json;charset=utf-8,"+encodeURIComponent(JSON.stringify(projects,null,2));
-    const dlAnchor = document.createElement('a');
-    dlAnchor.setAttribute("href", dataStr);
-    dlAnchor.setAttribute("download","divi_projects.json");
-    document.body.appendChild(dlAnchor);
-    dlAnchor.click();
-    dlAnchor.remove();
+  
+  // Export projects as JSON
+  function exportProjects() {
+    if (projects.length === 0) {
+      showAlert('No projects to export!', 'warning');
+      return;
+    }
+    
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(projects, null, 2));
+    const downloadAnchor = document.createElement('a');
+    downloadAnchor.setAttribute("href", dataStr);
+    downloadAnchor.setAttribute("download", `divi_projects_${Date.now()}.json`);
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
+    downloadAnchor.remove();
+    
+    showAlert('✅ Projects exported successfully!');
   }
-
+  
+  // Clear all projects
+  function clearAllProjects() {
+    if (projects.length === 0) return;
+    
+    if (confirm('⚠️ Are you sure you want to delete all projects? This cannot be undone.')) {
+      projects = [];
+      saveProjects();
+      showAlert('🗑️ All projects cleared!', 'warning');
+    }
+  }
+  
+  // Initialize on load
+  updateDashboard();
   renderProjects();
+  
+  // Smooth scroll for navigation - Fixed version
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const target = document.querySelector(targetId);
+        if (target) {
+          const navHeight = document.querySelector('nav').offsetHeight;
+          const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight - 20;
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  });
 </script>
 
 </body>
