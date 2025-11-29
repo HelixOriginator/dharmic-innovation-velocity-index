@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DIVI — Dharmic Innovation Velocity Index</title>
+  <link rel="icon" href="favicon.png" type="image/png" />
+  <style>
+    /* Global Dark Mode */
+    :root { color-scheme: dark; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0d0d0d;
+      color: #e0e0e0;
+      line-height: 1.6;
+    }
+    header {
+      background-color: #111;
+      padding: 2rem;
+      text-align: center;
+      border-bottom: 1px solid #222;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      color: #f0f0f0;
+    }
+    header p {
+      color: #aaa;
+      margin-top: 0.5rem;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+    .card {
+      background-color: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    input, button {
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      border: 1px solid #555;
+      background-color: #222;
+      color: #e0e0e0;
+      font-size: 1rem;
+    }
+    input:focus { outline: 2px solid #555; }
+    button {
+      cursor: pointer;
+      margin-top: 0.5rem;
+      background-color: #4f46e5;
+      border-color: #4f46e5;
+      color: white;
+    }
+    button:hover { background-color: #6366f1; }
+    ul { padding-left: 1.2rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Dharmic Innovation Velocity Index (DIVI)</h1>
+  <p>Track ethical momentum, measure impact, and verify project originality</p>
+</header>
+
+<main>
+  <div class="card">
+    <h2>Create a New Project</h2>
+    <input type="text" id="projectName" placeholder="Enter project title..." />
+    <button onclick="createProject()">Save Project</button>
+    <p id="message"></p>
+  </div>
+
+  <div class="card">
+    <h2>Projects</h2>
+    <ul id="projectList"></ul>
+  </div>
+</main>
+
+<script>
+  const projects = [];
+
+  function createProject() {
+    const input = document.getElementById('projectName');
+    const name = input.value.trim();
+    const message = document.getElementById('message');
+
+    if (!name) {
+      message.textContent = 'Project name cannot be empty.';
+      return;
+    }
+
+    const project = {
+      name: name,
+      karmaIndex: (Math.random() * 10).toFixed(1),
+      kallolPhase: ['Observation','Reflection','Creation','Dissemination'][Math.floor(Math.random()*4)],
+      helixId: 'DIVI-' + Math.floor(Math.random()*100000)
+    };
+    projects.push(project);
+
+    input.value = '';
+    message.textContent = `Project "${project.name}" created!`;
+
+    renderProjects();
+  }
+
+  function renderProjects() {
+    const list = document.getElementById('projectList');
+    list.innerHTML = '';
+    projects.forEach(p => {
+      const li = document.createElement('li');
+      li.innerHTML = `<strong>${p.name}</strong> — Karma: ${p.karmaIndex}, Phase: ${p.kallolPhase}, ID: ${p.helixId}`;
+      list.appendChild(li);
+    });
+  }
+</script>
+
+</body>
+</html>
