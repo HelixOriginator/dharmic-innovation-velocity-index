@@ -1,29 +1,83 @@
-# DIVI
+Dharmic Innovation Velocity Index (DIVI)
 
-A modular research project generator that helps users create structured summaries, visualizations, citations, and shareable research outputs.
+Created by Kallol Chakrabarti (also known as Kallol), Independent Researcher
 
-## Overview
+A world-first framework that measures the ethical momentum of youth-driven social innovation. DIVI blends dharmic principles, decentralized science, and modern analytics to help young innovators build credible, verifiable, and culturally grounded impact records.
 
-DIVI allows users to assemble research projects from text, videos, or external links. It analyzes content, extracts insights, and produces a clean project record that can be extended with citations, visual elements, and export options.
+Overview
 
-## Features
+DIVI is an open-source system that tracks how ethically and effectively a social project grows over time. It brings together four components:
 
-* Create and manage research projects
-* Analyze text, YouTube links, and documents (stubbed for now)
-* Auto-generate citations and references
-* Basic DOI-style identifier generation
-* Frontend preview of project data
-* API endpoints for processing and saving projects
+Karma Index — a structured way to measure community benefit, evidence strength, and ethical alignment.
 
-## Project Structure
+Kallol Wave Framework — a four-stage cycle that maps motivation and progress (Observation → Reflection → Creation → Dissemination).
 
-```
+Helix Originator Process — a novelty-verification pipeline that generates a project-level identifier similar to a DOI.
+
+Temporal Ethics Layer — optional Panchang-based alignment for users who want cultural or dharmic timing cues.
+
+The goal is simple: help students, NGOs, educators, and researchers understand the depth, direction, and credibility of their work.
+
+Why DIVI Matters
+
+Young innovators often struggle with:
+
+proving the authenticity of their projects
+
+getting research-ready credentials
+
+demonstrating ethical impact, not just activity
+
+showing that what they created is unique
+
+navigating misinformation, inflated claims, or vague impact numbers
+
+DIVI makes these challenges easier by offering real scoring, structured documentation, and transparent processes that anyone can audit.
+
+Key Features
+Ethical Velocity Dashboard
+
+Live indicators of:
+
+community impact
+
+stakeholder engagement
+
+ethical momentum
+
+phase progress within the Kallol cycle
+
+Helix Novelty Check
+
+A lightweight pipeline (stubbed in this version) that analyzes text, links, or videos and generates a unique identifier for the project.
+
+Karma Index Calculator
+
+Assigns values for:
+
+magnitude of benefit
+
+certainty of evidence
+
+alignment with dharmic principles
+
+temporal ethics (optional)
+
+Kallol Wave Tracking
+
+Shows which phase a project is in and what is needed to reach the next stage.
+
+Exports and Records
+
+A structured project record that grows over time and can be referenced, shared, or extended.
+
+Project Structure
 project-root/
 ├── backend/
-│   ├── main.py
-│   ├── models.py
-│   ├── helix.py
-│   ├── karma.py
+│   ├── main.py              # FastAPI entry point
+│   ├── models.py            # Data models
+│   ├── helix.py             # Novelty & identifier logic
+│   ├── karma.py             # Karma Index scoring
 │   └── requirements.txt
 └── frontend/
     ├── src/
@@ -33,66 +87,65 @@ project-root/
     │   └── styles/
     ├── package.json
     └── vite.config.ts
-```
 
-## Installation
+Installation
+Backend (FastAPI)
+cd backend
+pip install -r requirements.txt
+uvicorn main:app --reload
 
-### Backend (FastAPI)
 
-1. Navigate to the backend folder:
+Backend will run at:
 
-   ```bash
-   cd backend
-   ```
-2. Install dependencies:
+http://localhost:8000
 
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. Run the server:
+Frontend (React + Vite)
+cd frontend
+npm install
+npm run dev
 
-   ```bash
-   uvicorn main:app --reload
-   ```
-4. The API will be available at:
 
-   ```
-   http://localhost:8000
-   ```
+Frontend will run at:
 
-### Frontend (React + Vite)
+http://localhost:5173
 
-1. Navigate to the frontend folder:
+Usage
 
-   ```bash
-   cd frontend
-   ```
-2. Install dependencies:
+Start both servers (backend + frontend).
 
-   ```bash
-   npm install
-   ```
-3. Start the development server:
+Open the frontend in your browser.
 
-   ```bash
-   npm run dev
-   ```
-4. Visit:
+Create a project and add text, links, or video references.
 
-   ```
-   http://localhost:5173
-   ```
+View the computed Karma Index, Kallol phase, and Helix identifier.
 
-## Usage
+Save or export your project record.
 
-1. Start both backend and frontend.
-2. Open the interface in your browser.
-3. Create a research project, add inputs, and view the generated output.
+This version includes core functionality with room for expansion into real-time analytics, blockchain verification, and deeper novelty scoring.
 
-## Attribution
+Roadmap
 
-Created by **Kallol Chakrabarti**, also known as **Kallol**, Independent researcher.
+Integration of real Helix novelty analysis
 
-## License
+Expansion of ethical velocity metrics
 
-This project is released under the MIT License. See the `LICENSE` file for details.
+PDF and CSV export
+
+Multi-language interface
+
+Optional blockchain timestamping for identifiers
+
+Public API for NGOs and institutions
+
+Mentor-matching and community layer
+
+Attribution
+
+Created by:
+Kallol Chakrabarti (also known as Kallol)
+Independent Researcher
+
+License
+
+Released under the MIT License.
+See the LICENSE file for details.
