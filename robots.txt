@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://helixoriginator.github.io/dharmic-innovation-velocity-index/sitemap.xml
