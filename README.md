@@ -2,42 +2,42 @@ Dharmic Innovation Velocity Index (DIVI)
 
 Created by Kallol Chakrabarti (also known as Kallol), Independent Researcher
 
-A world-first framework that measures the ethical momentum of youth-driven social innovation. DIVI blends dharmic principles, decentralized science, and modern analytics to help young innovators build credible, verifiable, and culturally grounded impact records.
+A world-first framework for measuring the ethical momentum of youth-driven social innovation. DIVI blends dharmic principles, decentralized science, and modern analytics to help young innovators build credible, verifiable, and culturally grounded impact records.
 
 Overview
 
-DIVI is an open-source system that tracks how ethically and effectively a social project grows over time. It brings together four components:
+DIVI is an open-source system that tracks how ethically and effectively a social project evolves. It brings together four core components:
 
-Karma Index — a structured way to measure community benefit, evidence strength, and ethical alignment.
+Karma Index — measures community benefit, evidence strength, and ethical alignment.
 
-Kallol Wave Framework — a four-stage cycle that maps motivation and progress (Observation → Reflection → Creation → Dissemination).
+Kallol Wave Framework — a four-stage cycle mapping motivation and progress (Observation → Reflection → Creation → Dissemination).
 
 Helix Originator Process — a novelty-verification pipeline that generates a project-level identifier similar to a DOI.
 
-Temporal Ethics Layer — optional Panchang-based alignment for users who want cultural or dharmic timing cues.
+Temporal Ethics Layer — optional Panchang-based alignment for users who want cultural or dharmic timing guidance.
 
-The goal is simple: help students, NGOs, educators, and researchers understand the depth, direction, and credibility of their work.
+The aim is to help students, NGOs, educators, and researchers understand the depth, direction, and credibility of their work.
 
 Why DIVI Matters
 
-Young innovators often struggle with:
+Young innovators often face challenges such as:
 
-proving the authenticity of their projects
+proving authenticity
 
-getting research-ready credentials
+building research-ready credentials
 
-demonstrating ethical impact, not just activity
+demonstrating ethical impact instead of activity
 
-showing that what they created is unique
+showing originality
 
-navigating misinformation, inflated claims, or vague impact numbers
+dealing with misinformation or inflated claims
 
-DIVI makes these challenges easier by offering real scoring, structured documentation, and transparent processes that anyone can audit.
+DIVI addresses these gaps through structured scoring, transparent logic, and records that anyone can verify.
 
 Key Features
 Ethical Velocity Dashboard
 
-Live indicators of:
+Live indicators showing:
 
 community impact
 
@@ -45,15 +45,15 @@ stakeholder engagement
 
 ethical momentum
 
-phase progress within the Kallol cycle
+position within the Kallol cycle
 
 Helix Novelty Check
 
-A lightweight pipeline (stubbed in this version) that analyzes text, links, or videos and generates a unique identifier for the project.
+A lightweight analysis pipeline (stubbed in this version) that reviews text, links, or videos and generates a unique project identifier.
 
 Karma Index Calculator
 
-Assigns values for:
+Scores based on:
 
 magnitude of benefit
 
@@ -61,15 +61,15 @@ certainty of evidence
 
 alignment with dharmic principles
 
-temporal ethics (optional)
+optional temporal ethics
 
 Kallol Wave Tracking
 
-Shows which phase a project is in and what is needed to reach the next stage.
+Identifies the current phase and suggests what’s needed to move forward.
 
 Exports and Records
 
-A structured project record that grows over time and can be referenced, shared, or extended.
+Creates a structured project record that can grow over time and be shared or referenced.
 
 Project Structure
 project-root/
@@ -95,7 +95,7 @@ pip install -r requirements.txt
 uvicorn main:app --reload
 
 
-Backend will run at:
+Backend runs at:
 
 http://localhost:8000
 
@@ -105,47 +105,42 @@ npm install
 npm run dev
 
 
-Frontend will run at:
+Frontend runs at:
 
 http://localhost:5173
 
 Usage
 
-Start both servers (backend + frontend).
+Start backend and frontend.
 
 Open the frontend in your browser.
 
-Create a project and add text, links, or video references.
+Create a project and add text, links, or videos.
 
-View the computed Karma Index, Kallol phase, and Helix identifier.
+View the Karma Index, Kallol phase, and Helix identifier.
 
 Save or export your project record.
 
-This version includes core functionality with room for expansion into real-time analytics, blockchain verification, and deeper novelty scoring.
+This version includes the core workflow and leaves room for extensions such as real-time analytics, blockchain verification, and advanced novelty scoring.
 
 Roadmap
 
-Integration of real Helix novelty analysis
+Full Helix novelty analysis
 
-Expansion of ethical velocity metrics
+Expanded ethical velocity metrics
 
-PDF and CSV export
+PDF/CSV export
 
 Multi-language interface
 
-Optional blockchain timestamping for identifiers
+Optional blockchain timestamping
 
-Public API for NGOs and institutions
+Public API for institutions
 
-Mentor-matching and community layer
+Community and mentor-matching layer
 
 Attribution
 
-Created by:
+Created by
 Kallol Chakrabarti (also known as Kallol)
 Independent Researcher
-
-License
-
-Released under the MIT License.
-See the LICENSE file for details.
